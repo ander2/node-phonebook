@@ -23,3 +23,9 @@ exports.add_entry = function(req, res){
         res.json({status:'ok'});
     })
 }
+
+exports.del_entry = function(req, res){
+    var call = client.hdel('phonebook', req.body.name, function(err, reply){
+        res.json({status:'ok'});
+    })
+}

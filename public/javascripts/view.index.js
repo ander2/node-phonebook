@@ -1,10 +1,17 @@
 $(function(){
 
+    function PhonebookViewModel(name, phone) {
+        // Data
+        this.name = ko.observable(name);
+        this.phone = ko.observable(phone);
+    }; 
+
     var getEntryData = function(){
        var name =  $(this).text();
        $.getJSON('/entry/' + name, function(data){
-            $('#name').html(name);
-            $('#phone').text(data);
+            /*$('#name').html(name);
+            $('#phone').text(data);*/
+            ko.applyBindings( new PhonebookViewModel(name, data) );            
        })
    }
    $('#entries li a').click(getEntryData);
@@ -21,6 +28,31 @@ $(function(){
             success: function(data) {
                var link = $('<a>').text(name).click(getEntryData);
                $('<li>').appendTo('#entries').html(link);
+               $('#new-name').val('');
+               $('#new-phone').val('');
+            },
+            error: function(err) {
+               var msg = 'Status: ' + err.status + ': ' + err.responseText;
+               alert(msg);
+            }
+        });  
+   });
+
+   $('#del-phone').click(function(){
+        var name = $('#new-name').val();
+        var phone = $('#new-phone').val();
+        $.ajax({
+            method: 'POST',
+            url: '/entry/delete',
+            data: JSON.stringify({name: name, phone: phone}),
+            contentType: "application/json; charset=utf-8",
+            dataType: "json",
+            success: function(data) {
+               $('#entries li a').each(function(){
+                  if ($(this).text() == name){
+                    $(this).parent().remove();
+                  }
+               });
                $('#new-name').val('');
                $('#new-phone').val('');
             },

@@ -9,11 +9,16 @@ block content
                     a(href='#') #{entry}
     div#content
         div#name
+            span(data-bind="text: name")
         div#phone
+            span(data-bind="text: phone")
         div.new-entry
             p Create new entry:
             label(for='new-name') Name
-            input#new-name
-            laber(for='new-phone') Phone
-            input#new-phone
+            input#new-name(data-bind="value: name")
+            label(for='new-phone') Phone
+            input#new-phone(data-bind="value: phone")
             a(id='add-new-phone', href='#') Add
+            &nbsp;
+            a(id='del-phone', href='#') Delete
+
