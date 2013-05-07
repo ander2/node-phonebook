@@ -1,0 +1,16 @@
+body {
+  padding: 50px;
+  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+}
+
+a {
+  color: #00B7FF;
+}
+
+h1{ text-align: center;}
+
+#left-column{width: 300px; float: left}
+#content{ float: left}
+
+#name{ font-size: 2em; color: blue;}
+#phone{ font-size: 1.5em; color: black}

@@ -1,0 +1,19 @@
+extends layout
+
+block content
+    h1 Phonebook 
+    div#left-column
+        ul#entries
+            each entry in entries
+                li
+                    a(href='#') #{entry}
+    div#content
+        div#name
+        div#phone
+        div.new-entry
+            p Create new entry:
+            label(for='new-name') Name
+            input#new-name
+            laber(for='new-phone') Phone
+            input#new-phone
+            a(id='add-new-phone', href='#') Add
